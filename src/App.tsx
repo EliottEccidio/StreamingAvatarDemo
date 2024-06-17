@@ -4,13 +4,25 @@
 import { useEffect, useRef, useState } from 'react';
 import { Configuration, NewSessionData, StreamingAvatarApi} from '@heygen/streaming-avatar';
 import './App.css';
+import { getToken } from './getToken';
 
 function App() {
   const [stream, setStream] = useState<MediaStream> ();
   const [debug, setDebug] = useState<string> ();
+  let token;
+  
+  const fetchToken = async () => {
+    const token = await getToken();
+    console.log("\n-------_______--------\n Value of the token:"+token+"\n--------------\n")
+    return String(token);
+  }
+  token = fetchToken();
+  console.log("\n--------------\nToken in APP:"+token+"\n\n")
+  
   const avatar = useRef(new StreamingAvatarApi(
-      new Configuration({accessToken: 'ACCESS_TOKEN'})
-    ));
+      new Configuration({accessToken: token})
+  ));
+  
 
   const [text, setText] = useState<string>("");
   const [avatarId, setAvatarId] = useState<string>("");
