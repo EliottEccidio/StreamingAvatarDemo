@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "../../test_audio/my-app/testaudio.tsx"  ]
 }
